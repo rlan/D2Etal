@@ -18,6 +18,7 @@
 [Type] == Ring && [Quality] == Rare # [FCR] >= 10 && [MaxHP] >= 25 && [HPRegen] >= 7
 [Type] == Ring && [Quality] == Rare # [FCR] >= 10 && [MaxHP] >= 35 && ([ColdResist] >= 15 || [FireResist] >= 15 || [LightResist] >= 15)
 [Type] == Ring && [Quality] == Rare # [FCR] >= 10 && [MaxHP] >= 25 && (([ColdResist]+[FireResist] >= 20) || ([ColdResist]+[LightResist] >= 20) || ([FireResist]+[LightResist] >= 20))
+[Type] == Ring && [Quality] == Rare # [FCR] >= 10 && (([ColdResist]+[FireResist] >= 20) || ([ColdResist]+[LightResist] >= 20) || ([FireResist]+[LightResist] >= 20))
 [Type] == Ring && [Quality] == Rare # [Dexterity]+[Strength] >= 30 && (([ColdResist]+[FireResist] >= 15) || ([ColdResist]+[LightResist] >= 15) || ([FireResist]+[LightResist] >= 15))
 [Type] == Ring && [Quality] == Rare # [Dexterity]+[Strength] >= 30 && ([ColdResist] >= 15 || [FireResist] >= 15 || [LightResist] >= 15)
 [Type] == Ring && [Quality] == Rare # [Dexterity]+[Strength] >= 30 && [MaxHP] >= 15
@@ -31,6 +32,8 @@
 
 //RARE MF AMULET
 [Type] == Amulet && [Quality] == Rare # [ItemMagicBonus] >= 35
+//[Type] == Amulet && [Quality] == Rare # [FCR] >= 10
+[Type] == Amulet && [Quality] == Rare # [FCR] >= 10 && (([ColdResist]+[FireResist] >= 20) || ([ColdResist]+[LightResist] >= 20) || ([FireResist]+[LightResist] >= 20))
 
 //RARE VISIONARY CIRCLET
 [Type] == Circlet && [Quality] == Rare # [ItemToHitPercentPerLevel] > 1
@@ -64,8 +67,10 @@
 [Type] == Boots && [Quality] == Rare && [Flag] == Ethereal # [FRW] >= 30 && (([ColdResist]+[FireResist]+[LightResist] >= 75) || ([ColdResist]+[FireResist]+[PoisonResist] >= 90) || ([ColdResist]+[LightResist]+[PoisonResist] >= 90) || ([FireResist]+[LightResist]+[PoisonResist] >= 90)) && [ItemReplenishDurability] >= 1
 
 //RARE BELTS
-[Type] == Belt && [Quality] == Rare && [Flag] != Ethereal # [FHR] == 24 && [Strength] >= 20 && [MaxHP] >= 40
-[Type] == Belt && [Quality] == Rare && [Flag] == Ethereal # [FHR] == 24 && [Strength] >= 20 && [MaxHP] >= 40 && [ItemReplenishDurability] >= 1
+[Type] == Belt && [Quality] == Rare && [Flag] != Ethereal # [FHR] >= 17
+[Type] == Belt && [Quality] == Rare && [Flag] == Ethereal # [FHR] >= 17 && [ItemReplenishDurability] >= 1
+//[Type] == Belt && [Quality] == Rare && [Flag] != Ethereal # [FHR] == 24 && [Strength] >= 20 && [MaxHP] >= 40
+//[Type] == Belt && [Quality] == Rare && [Flag] == Ethereal # [FHR] == 24 && [Strength] >= 20 && [MaxHP] >= 40 && [ItemReplenishDurability] >= 1
 
 //RARE MELEE WEAPONS
 [Type] == Axe && [Quality] == Rare && [Flag] != Ethereal # [IAS] >= 20 && [EnhancedDamage] >= 300 || [ItemMaxDamagePerLevel] >= 1 && [EnhancedDamage] >= 250

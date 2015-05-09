@@ -8,6 +8,7 @@
 // -----------------------------------------------------------------------------------------------------
 
 //RARE/MAGIC JEWELS
+[Type] == Jewel && ([Quality] == Rare || [Quality] == Magic) # [IAS] == 15
 [Type] == Jewel && ([Quality] == Rare || [Quality] == Magic) # [MAXDamage] >= 20 || ([MAXDamage] >= 13 && ([IAS] == 15 || [ItemReqPercent] == -15 || [MINDamage] >= 8))
 [Type] == Jewel && ([Quality] == Rare || [Quality] == Magic) # [MINDamage] >= 18 || ([MINDamage] == 8 && ([IAS] == 15 || [ItemReqPercent] == -15 || [MINDamage] >= 8))
 [Type] == Jewel && ([Quality] == Rare || [Quality] == Magic) # [EnhancedDamage] >= 35 || ([EnhancedDamage] >= 30 && ([IAS] == 15 || [ItemReqPercent] == -15 || [MINDamage] >= 8))
@@ -64,18 +65,18 @@
 [Type] == VoodooHeads && ([Quality] == Rare || [Quality] == Magic) # [PoisonAndBoneSkillTab] >= 2 && ([SkillBoneSpear] >= 2 || [SkillBoneSpirit] >= 2 || [SkillPoisonNova] >= 2)
 
 //MAGIC/RARE SOCKETED WHALE ARMOR
-//[Type] == Armor && ([Quality] == Rare || [Quality] == Magic) # [Sockets] == 3 && [MaxHP] >= 75
-//[Type] == Armor && ([Quality] == Rare || [Quality] == Magic) # [Sockets] == 4 && [MaxHP] >= 75
+[Type] == Armor && ([Quality] == Rare || [Quality] == Magic) # [Sockets] == 3 && [MaxHP] >= 75
+[Type] == Armor && ([Quality] == Rare || [Quality] == Magic) # [Sockets] == 4 && [MaxHP] >= 75
 
 //MAGIC/RARE SOCKET/FHR ARMOR
-//[Type] == Armor && ([Quality] == Rare || [Quality] == Magic) # [Sockets] == 3 && [FHR] >= 17
-//[Type] == Armor && ([Quality] == Rare || [Quality] == Magic) # [Sockets] == 4 && [FHR] >= 24
+[Type] == Armor && ([Quality] == Rare || [Quality] == Magic) # [Sockets] == 3 && [FHR] >= 17
+[Type] == Armor && ([Quality] == Rare || [Quality] == Magic) # [Sockets] == 4 && [FHR] >= 24
 
 //MAGIC SKILL/IAS GLOVES
-//[Type] == Gloves && [Quality] == Magic && [Flag] != Ethereal # [IAS] >= 20 && [JavelinAndSpearSkillTab] == 3
-//[Type] == Gloves && [Quality] == Magic && [Flag] != Ethereal # [IAS] >= 20 && [BowAndCrossbowSkillTab] == 3
-//[Type] == Gloves && [Quality] == Magic && [Flag] != Ethereal # [IAS] >= 20 && [PassiveAndMagicSkillTab] == 3
-//[Type] == Gloves && [Quality] == Magic && [Flag] != Ethereal # [IAS] >= 20 && [MartialArtsSkillTab] == 3
+[Type] == Gloves && [Quality] == Magic && [Flag] != Ethereal # [IAS] >= 20 && [JavelinAndSpearSkillTab] == 3
+[Type] == Gloves && [Quality] == Magic && [Flag] != Ethereal # [IAS] >= 20 && [BowAndCrossbowSkillTab] == 3
+[Type] == Gloves && [Quality] == Magic && [Flag] != Ethereal # [IAS] >= 20 && [PassiveAndMagicSkillTab] == 3
+[Type] == Gloves && [Quality] == Magic && [Flag] != Ethereal # [IAS] >= 20 && [MartialArtsSkillTab] == 3
 
 //MAGIC/RARE +5/+6 LS CLAWS
 [Type] == AssassinClaw && ([Quality] == Rare || [Quality] == Magic) # [AssassinSkills]+[SkillLightningSentry] >= 5

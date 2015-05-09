@@ -37,14 +37,15 @@
 //[Name] == GrandCharm && [Quality] == magic # [ItemAddSkillTab] >= 1 && ([MaxHP] >= 20 || [Strength] >= 6 || [Dexterity] >= 6 || [FHR] >= 12 || [FRW] >= 7)
 
 //GOLD FIND GC
-//[Name] == GrandCharm && [Quality] == Magic # [ItemGoldBonus] >= 40
-[Name] == GrandCharm && [Quality] == Magic # [ItemGoldBonus] >= 40 && (([ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 60) || [ColdResist] >= 26 || [FireResist] >= 26 || [LightResist] >= 26)
-[Name] == GrandCharm && [Quality] == Magic # [ItemGoldBonus] >= 40 && (([MAXDamage] >= 9 && [ToHit] >= 49) || [Mana] >= 40)
+[Name] == GrandCharm && [Quality] == Magic # [ItemGoldBonus] >= 30
+//[Name] == GrandCharm && [Quality] == Magic # [ItemGoldBonus] >= 40 && (([ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 60) || [ColdResist] >= 26 || [FireResist] >= 26 || [LightResist] >= 26)
+//[Name] == GrandCharm && [Quality] == Magic # [ItemGoldBonus] >= 40 && (([MAXDamage] >= 9 && [ToHit] >= 49) || [Mana] >= 40)
 
 //RESIST GC
-[Name] == GrandCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 60
-[Name] == GrandCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 56 && ([FRW] == 7 || [FHR] == 12)
-[Name] == GrandCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 40 && [MaxHP] >= 25
+[Name] == GrandCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 15
+//[Name] == GrandCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 60
+//[Name] == GrandCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 46 && ([FRW] == 7 || [FHR] == 12)
+//[Name] == GrandCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 30 && [MaxHP] >= 25
 
 //MAX DAMAGE GC
 [Name] == GrandCharm && [Quality] == Magic # [MAXDamage] >= 9 && [ToHit] >= 49
@@ -57,8 +58,9 @@
 [Name] == GrandCharm && [Quality] == Magic # [MaxHP] >= 40 && [Mana] >= 35
 
 //RESIST LC
-[Name] == LargeCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 28 && [MaxHP] >= 25
-[Name] == LargeCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 24 && ([MaxHP] >= 15 || [FHR] >= 8)
+[Name] == LargeCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 10
+//[Name] == LargeCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 28 && [MaxHP] >= 25
+//[Name] == LargeCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 24 && ([MaxHP] >= 15 || [FHR] >= 8)
 
 //MAX DAMAGE LC
 [Name] == LargeCharm && [Quality] == Magic # [MAXDamage] >= 6 && [ToHit] >= 30
@@ -70,34 +72,39 @@
 [Name] == LargeCharm && [Quality] == Magic # [MaxHP] >= 30 && [Mana] >= 30
 
 //STAT LC
-[Name] == LargeCharm && [Quality] == Magic # [Strength] == 5
-[Name] == LargeCharm && [Quality] == Magic # [Dexterity] == 5
+[Name] == LargeCharm && [Quality] == Magic # [Strength] >= 4
+//[Name] == LargeCharm && [Quality] == Magic # [Strength] == 5
+[Name] == LargeCharm && [Quality] == Magic # [Dexterity] >= 4
+//[Name] == LargeCharm && [Quality] == Magic # [Dexterity] == 5
 
 //LIFE SC
-[Name] == SmallCharm && [Quality] == Magic # [MaxHP] >= 20
+[Name] == SmallCharm && [Quality] == Magic # [MaxHP] >= 9
+//[Name] == SmallCharm && [Quality] == Magic # [MaxHP] >= 20
 //[Name] == SmallCharm && [Quality] == Magic # [MaxHP] >= 15 && [Mana] >= 10
 
 //MANA SC
-//[Name] == SmallCharm && [Quality] == Magic # [Mana] >= 15 && [FHR] == 5
-//[Name] == SmallCharm && [Quality] == Magic # [Mana] >= 15 && [FRW] == 3
-//[Name] == SmallCharm && [Quality] == Magic # [Mana] >= 15 && [Strength] == 2
-//[Name] == SmallCharm && [Quality] == Magic # [Mana] >= 15 && [Dexterity] == 2
+[Name] == SmallCharm && [Quality] == Magic # [Mana] >= 15 && [FHR] == 5
+[Name] == SmallCharm && [Quality] == Magic # [Mana] >= 15 && [FRW] == 3
+[Name] == SmallCharm && [Quality] == Magic # [Mana] >= 15 && [Strength] == 2
+[Name] == SmallCharm && [Quality] == Magic # [Mana] >= 15 && [Dexterity] == 2
 
 //STAT SC
 //[Name] == SmallCharm && [Quality] == Magic # [Strength] == 2
 //[Name] == SmallCharm && [Quality] == Magic # [Dexterity] == 2
 
 //MF & GF SC
-[Name] == SmallCharm && [Quality] == Magic # [ItemMagicBonus] >= 6
+[Name] == SmallCharm && [Quality] == Magic # [ItemMagicBonus] >= 4
 //[Name] == SmallCharm && [Quality] == Magic # [ItemGoldBonus] >= 10
 //[Name] == SmallCharm && [Quality] == Magic # [Mana] >= 10 && ([ItemMagicBonus] >= 7 || [ItemGoldBonus] >= 10)
 //[Name] == SmallCharm && [Quality] == Magic # [MAXDamage] == 3 && [ToHit] >= 10 && ([ItemMagicBonus] >= 7 || [ItemGoldBonus] >= 10)
 
 //RESIST SC
-[Name] == SmallCharm && [Quality] == Magic # [MaxHP] >= 15 && ([ColdResist] >= 9 || [FireResist] >= 9 || [LightResist] >= 9 || [PoisonResist] >= 9)
+[Name] == SmallCharm && [Quality] == Magic # ([ColdResist] >= 7 || [FireResist] >= 7 || [LightResist] >= 7 || [PoisonResist] >= 7)
+//[Name] == SmallCharm && [Quality] == Magic # [MaxHP] >= 15 && ([ColdResist] >= 9 || [FireResist] >= 9 || [LightResist] >= 9 || [PoisonResist] >= 9)
 [Name] == SmallCharm && [Quality] == Magic # ([FRW] >= 3 || [FHR] >= 5) && ([ColdResist] >= 9 || [FireResist] >= 9 || [LightResist] >= 9 || [PoisonResist] >= 9)
 [Name] == SmallCharm && [Quality] == Magic # ([ItemMagicBonus] >= 7 || [ItemGoldBonus] >= 10) && ([ColdResist] >= 9 || [FireResist] >= 9 || [LightResist] >= 9 || [PoisonResist] >= 9)
-[Name] == SmallCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 20
+[Name] == SmallCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 6
+//[Name] == SmallCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 20
 [Name] == SmallCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 12 && ([MaxHP] >= 10 || [FRW] == 3 || [FHR] == 5 || [ItemMagicBonus] >= 7)
 //[Name] == SmallCharm && [Quality] == Magic # [ColdResist]+[FireResist]+[LightResist]+[PoisonResist] >= 16 && ([ItemGoldBonus] == 10 || [Strength] == 2 || [Dexterity] == 2)
 
