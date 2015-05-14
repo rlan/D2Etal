@@ -117,7 +117,7 @@ var NTConfig_Script = [];
 	var leechpos = [];
 	var NTConfig_LeechHydra;
 	var NTConfig_FollowtoWorldStone;
-	var NTConfig_WaitAtPassiveSPotForBaal;
+	var NTConfig_WaitAtPassiveSpotForBaal;
 	var NTConfig_GrabShrine;
 	var _FindXPArea = [];
 	var NTConfig_ClearAroundShrine;

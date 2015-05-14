@@ -300,7 +300,7 @@ function NT_LeechBaalFighter(){
 			Say(Baal_FreeSpaceMessage);
 			NTTMGR_VisitTown();
 		}*/
-		if(NTConfig_WaitAtPassiveSPotForBaal) {
+		if(NTConfig_WaitAtPassiveSpotForBaal) {
 			NTM_MoveTo(me.areaid, 15118, 5003); // change to help with baal bug
 		} else {
 			NTM_MoveTo(me.areaid, 15092, 5010);
