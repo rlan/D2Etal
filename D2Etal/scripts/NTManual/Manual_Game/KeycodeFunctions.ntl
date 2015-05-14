@@ -38,6 +38,7 @@ function Do_KeyHotList()
 	HotKeys += COLOR_2 + "[" + WhichHotKey(Key_GameStats) + "]" + COLOR_4 + " Log your current game's stats to manager" + "\n";
 	HotKeys += COLOR_2 + "[" + WhichHotKey(Key_CharStats) + "]" + COLOR_4 + " Log your extended stats to manager" + MercOnOrNo + "\n";
 	HotKeys += COLOR_2 + "[" + WhichHotKey(Key_AntiIdle) + "]" + COLOR_4 + " Turn on AntiIdle for extended AFK's" + "\n";
+	HotKeys += COLOR_2 + "[" + WhichHotKey(Key_StartCubing) + "]" + COLOR_4 + " Start cubing! Must be in town." + "\n";
 	HotKeys += COLOR_1 + "---------------------------------------------------";
 	MG_LogToOOG(NTC_LOG_COMMON, HotKeys);
 }

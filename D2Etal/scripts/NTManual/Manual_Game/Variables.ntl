@@ -56,6 +56,7 @@ var Key_GoToTown;
 var Key_PickItems;
 var Key_AntiIdle;
 	var MGAntiIdle = false;
+var Key_StartCubing;
 var Key_GameStats;
 var Key_CursoriLvL;
 var Key_DPSMeter;

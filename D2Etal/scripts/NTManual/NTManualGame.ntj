@@ -1,4 +1,4 @@
-var Rev = "1.1.3";
+var Rev = "1.1.4";
 var warncount;
 var _AreaName;
 var busy = false;
@@ -32,6 +32,8 @@ function NTMain()
 
 	RegisterEvent(EVENT_KEYDOWN, NT_KeyEvents);
 	RegisterEvent(EVENT_GAMEMSG, MG_GameMsgEvent);
+
+	NTCU_InitCubing();
 
 	var _count = 0;
 	me.maxgametime = 0;
@@ -157,6 +159,11 @@ function NT_KeyEvents(keycode)
 				Print(COLOR_4 + "AntiIdle " + COLOR_2 + "ON");
 				if(me.gameserverip) Say("Going AFK, may be a while!");
 			}
+			break;
+		case Key_StartCubing:
+			Print(COLOR_4 + "Start cubing...");
+			NTTMGR_VisitStash(true);
+			Print(COLOR_4 + "Done cubing.");
 			break;
 		case Key_PickItems:
 			NTSI_PickItems();

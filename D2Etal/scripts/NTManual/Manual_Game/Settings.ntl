@@ -75,6 +75,7 @@ function MG_LoadConfig(MyChar)
 	Key_CharStats = 34;			 	// Pg Dn - Log your extended stats to manager
 		NTConfig_MercStats = true;	// true to get Merc stats, false if not
 	Key_AntiIdle = 19;				// Pause/break - Turn on AntiIdle for extended AFK's
+	Key_StartCubing = 35;			// End - Start cubing. Must be in town!
 	
 	// -----------------------------------------------------------------------------------------------------------------
 	// Development Tools Settings Only!!
@@ -94,6 +95,53 @@ function MG_LoadConfig(MyChar)
 	NTMG_StateIdRange = 	[0, 159];		// set the range of me.states you want to check if active ie [141, 154] looks for druid states
 	NTMG_AreaIDs = 1;		 				// 1 prints AreaID and X/Y coordinates, 2 logs AreaID and X/Y coordinates to .txt, 3 does both
 	
+	
+	
+	//------------------------------------------------------------------------------
+	// Cubing configuration
+	//------------------------------------------------------------------------------
+	NTConfig_Cubing = true;										// Enable Cubing?
+
+	NTConfig_CubingItem.push([NTCU_GEM, 560]);					// Flawless Amethyst
+	NTConfig_CubingItem.push([NTCU_GEM, 565]);					// Flawless Topaz
+	NTConfig_CubingItem.push([NTCU_GEM, 570]);					// Flawless Saphire
+	NTConfig_CubingItem.push([NTCU_GEM, 575]);					// Flawless Emerald
+	NTConfig_CubingItem.push([NTCU_GEM, 580]);					// Flawless Ruby
+	NTConfig_CubingItem.push([NTCU_GEM, 585]);					// Flawless Diamond
+	NTConfig_CubingItem.push([NTCU_GEM, 600]);					// Flawless Skull
+
+	//NTConfig_CubingItem.push([NTCU_RUNE_EL, 0]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_ELD, 0]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_TIR, 0]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_NEF, 0]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_ETH, 0]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_ITH, 0]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_TAL, 0]);
+	NTConfig_CubingItem.push([NTCU_RUNE_RAL, 0]);
+	NTConfig_CubingItem.push([NTCU_RUNE_ORT, 0]);
+	NTConfig_CubingItem.push([NTCU_RUNE_THUL, 562]);
+	NTConfig_CubingItem.push([NTCU_RUNE_AMN, 557]);
+	NTConfig_CubingItem.push([NTCU_RUNE_SOL, 567]);
+	NTConfig_CubingItem.push([NTCU_RUNE_SHAEL, 577]);
+	NTConfig_CubingItem.push([NTCU_RUNE_DOL, 572]);
+	NTConfig_CubingItem.push([NTCU_RUNE_HEL, 582]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_IO, 563]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_LUM, 558]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_KO, 568]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_FAL, 578]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_LEM, 573]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_PUL, 583]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_UM, 564]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_MAL, 559]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_IST, 569]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_GUL, 579]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_VEX, 574]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_OHM, 584]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_LO, 565]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_SUR, 560]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_BER, 570]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_JAH, 580]);
+	//NTConfig_CubingItem.push([NTCU_RUNE_CHAM, 575]);
 }
 
 function MG_PickitLoad()
