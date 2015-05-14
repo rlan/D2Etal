@@ -131,7 +131,8 @@ function NTMain(){
 	}
 	NT_ClearThroneInt();
 	if(NTConfig_PublicMode){
-		NTM_MoveTo(me.areaid, 15114, 5069, 1, true);
+		//NTM_MoveTo(me.areaid, 15114, 5069, 1, true); // Bottom right corner
+		NTM_MoveTo(me.areaid, 15114, 5061, 1, true); // Between 3rd and 4th column away from Baal portal. Right wall.
 		NTM_MakeTP();
 		Say(Baal_SafeTp);
 		NTC_Delay(500);
