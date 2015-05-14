@@ -1,0 +1,319 @@
+// --------------------------------------------------------------------
+//							   Scripted by Diabolic@ProjectEtal.com
+//							  Additional work by Xai@ProjectEtal.com
+//									  Intended for use with D2Etal
+//					  For support on this script visit projectetal.com
+// --------------------------------------------------------------------
+ 
+var WpToTown;
+var busy = false;
+var bocalled = false;
+var ListenForBORequests = true;
+ 
+function NTMain() {
+	var pretown, portal;
+
+	WpToTown = false;
+
+	Include("libs/common/NTCommon.ntl");
+	NTC_IncludeLibs();
+	NTC_IncludeConfig("NTBot/char_configs");
+
+	NT_LoadConfig();
+	NTSI_LoadNIPFiles("NTBot/item_configs");
+
+	NTA_Initialize();
+
+	busy = true;
+
+	if(!NTTM_CheckAct()) {
+		NTC_SendMsgToScript("NTBotGame.ntj", "NTTM_CheckAct()");
+		return;
+	}
+
+	NTTM_TownMove("portalspot");
+
+	busy = false;
+
+
+	RegisterEvent(EVENT_GAMEMSG,
+		function (msg, type) {
+			if (type === 0) {
+				var sender, lowercase,
+					split = msg.split(":");
+
+				sender = split[0].substring(3, split[0].length - 3);
+
+				if (sender === me.name) {
+					return;
+				}
+
+				lowercase = msg.toLowerCase();
+				stopmessage = NTConfig_BoStopMessage.toLowerCase();
+
+
+				if (lowercase.indexOf("bo me") !== -1 && !busy) {
+					if (sender === NTConfig_BoWho) {
+						bocalled = true;
+					} else {
+						BoSay("Get your own bo", NTConfig_AlertType);
+					}
+				} else if (lowercase.indexOf("bo me") !== -1 && busy) {
+					if (sender === NTConfig_BoWho) {
+						BoSay("Currently boing a toon.", NTConfig_AlertType);
+					} else {
+						BoSay("Get your own bo", NTConfig_AlertType);
+					}
+				}  else if (lowercase.indexOf(stopmessage) !== -1 ){
+					if (sender === NTConfig_BoWho) {
+						BoSay("Hey, ho. Lets Go!", NTConfig_AlertType);
+						ListenForBORequests = false
+					} else {
+						BoSay("Get your own bo", NTConfig_AlertType);
+					}
+				}
+			}
+		});
+
+	while (CallerInGame() && ListenForBORequests) {
+		if (bocalled) {
+			busy = true;
+			Delay(2000); // Delay location check on the requester
+			if (me.act !== CheckPlayerAct(NTConfig_BoWho)) {
+				BoSay("Coming, need to switch acts!", NTConfig_AlertType);
+				NTTM_CheckAct(CheckPlayerAct(NTConfig_BoWho));
+				NTTM_TownMove("portalspot");
+			} else {
+				NTTM_TownMove("portalspot");
+			}
+
+			pretown = me.areaid;
+
+			NTM_UsePortal("BluePortal", GetPlayerAreaId(NTConfig_BoWho), NTConfig_BoWho);
+			NTP_DoPrecast(true);
+
+			WpDetected = GetWaypointInt();
+
+			if (NTConfig_GrabNearbyWps && WpDetected > 0) {
+				TakeWayPointHome(me.areaid);
+				WpToTown = true;
+			} else {
+				if (!NTM_UsePortal("BluePortal", pretown, NTConfig_BoWho)) {
+					NTTM_CheckAct();
+				}
+			}
+		}
+
+		if (WpToTown) {
+			NTTM_TownMove("portalspot");
+			WpToTown = false;
+		}
+
+		busy = false;
+		bocalled = false;
+
+		Delay(500);
+	}
+	NTC_SendMsgToScript("NTBotGame.ntj", "SCRIPT_END");
+}
+ 
+function BoSay(line, type) {
+	if (type === undefined) {
+		type = 0;
+	}
+
+	switch (type) {
+		case 0:
+			return Print(line);
+		case 1:
+			return Say(line);
+	}
+}
+ 
+function CheckPlayerAct (who){
+	var act,
+		player = GetPlayerUnit();
+
+	if (player) {
+		do {
+			if(player.name === who){
+				act = GetPlayerAct(who);
+				NTC_SendLogToOOG(NTC_LOG_COMMON, "BO requester is in Act " + act);
+				return act;
+			}
+		} while(player.GetNext());
+	}
+	return Print("Failed to CheckPlayer");
+}
+ 
+function GetPlayerAreaId (who) {
+	var player = GetPlayerUnit();
+
+	if (player) {
+		do {
+			if(player.name === who){
+				return player.areaid;
+			}
+		} while (player.GetNext());
+	}
+	return Print("Failed to locate areaid of caller");
+}
+ 
+function GetPlayerAct(who) {
+	var player = GetPlayerUnit();
+	if (player) {
+		do {
+			if(player.name === who){
+				if (player.areaid < 40) {
+					return 1;
+				}
+
+				if (player.areaid >= 40 && player.areaid <= 74) {
+					return 2;
+				}
+
+				if (player.areaid >= 75 && player.areaid <= 102) {
+					return 3;
+				}
+
+				if (player.areaid >= 103 && player.areaid <= 108) {
+					return 4;
+				}
+
+				if (player.areaid >= 109 && player.areaid <= 132) {
+					return 5;
+				}
+			}
+		} while(player.GetNext());
+	}
+	return Print("Failed to Check Players act");
+}
+ 
+function CallerInGame() {
+	var player;
+
+	player = GetPlayerUnit();
+
+	if (player) {
+		do {
+			if (NTConfig_BoWho.indexOf(player.name) !== -1) {
+				return true;
+			}
+		} while (player.GetNext());
+	}
+
+	Print("No caller detected in game");
+
+	return false;
+}
+ 
+function GetWaypointInt() {
+	var i, waypoint, classid;
+
+	for(i = 0 ; i <= 2 ; i += 1)
+	{
+		waypoint = NTC_FindUnit(NTC_UNIT_OBJECT);
+
+		if(waypoint)
+		{
+			do
+			{
+				classid = waypoint.classid;
+
+				if(classid === 119 || classid === 145 || classid === 156 || classid === 157
+					|| classid === 237 || classid === 238 || classid === 288 || classid === 323
+					|| classid === 324 || classid === 398 || classid === 402 || classid === 429
+					|| classid === 494 || classid === 496 || classid === 511 || classid === 539) {
+					return classid;
+				}
+			} while(waypoint.GetNext());
+		}
+
+		if(i < 2) {
+			NTC_Delay(500);
+		}
+	}
+
+	return null;
+}
+ 
+function TakeWayPointHome(areaid){
+	var unit, wp, areaId,
+		open = true;
+
+	switch(areaid) {
+		case 3: wp = 119; break;
+		case 4: wp = 119; break;
+		case 5: wp = 119; break;
+		case 6: wp = 119; break;
+		case 27: wp = 119; break;
+		case 29: wp = 157; break;
+		case 32: wp = 119; break;
+		case 35: wp = 157; break;
+		case 42: wp = 156; break;
+		case 43: wp = 156; break;
+		case 44: wp = 156; break;
+		case 46: wp = 402; break;
+		case 48: wp = 323; break;
+		case 52: wp = 288; break;
+		case 57: wp = 156; break;
+		case 74: wp = 402; break;
+		case 76: wp = 237; break;
+		case 77: wp = 237; break;
+		case 78: wp = 237; break;
+		case 79: wp = 237; break;
+		case 80: wp = 237; break;
+		case 81: wp = 237; break;
+		case 83: wp = 237; break;
+		case 101: wp = 324; break;
+		case 106: wp = 238; break;
+		case 107: wp = 238; break;
+		case 111: wp = 496; break;
+		case 112: wp = 496; break;
+		case 113: wp = 511; break;
+		case 115: wp = 511; break;
+		case 117: wp = 496; break;
+		case 118: wp = 511; break;
+		case 123: wp = 496; break;
+		case 129: wp = 494; break;
+	}
+
+	switch (me.act) {
+		case 1:
+			areaId = 1;
+			break;
+		case 2:
+			areaId = 40;
+			break;
+		case 3:
+			areaId = 75;
+			break;
+		case 4:
+			areaId = 103;
+			break;
+		case 5:
+			areaId = 109;
+			break;
+	}
+
+	NTM_MoveToPresetUnit(areaid, NTC_UNIT_OBJECT, wp, 1, 1);
+
+	if(open){
+		unit = NTC_FindUnit(NTC_UNIT_OBJECT, wp);
+
+		if(unit){
+			if(GetDistance(me, unit) > 2) {
+				NTM_MoveTo(unit.areaid, unit.x+1, unit.y);
+			}
+
+			NTC_DoClick(NTC_CLICK_LDOWN, NTC_SHIFT_NONE, unit);
+			NTC_PingDelay(1000);
+
+			if (me.TakeWaypoint(areaId)) {
+				NTC_PingDelay(NTConfig_AreaDelay);
+				return true;
+			}
+		}
+	}
+	return false;
+}

@@ -38,6 +38,12 @@ function NT_LoadConfig()
 	NTConfig_LeechBo = false; 							// Set false to disable BO & BC cast by leecher.
 	NTConfig_LeechExitDelay = 500;						// Delay before leecher exits game after leader in milliseconds.  Use this to stagger leechers exit times to avoid crashes.
 
+    //NTConfig_Script.push("NTBoBarb.ntj"); // for a follow barb to bo main players
+		NTConfig_BoWho = "config me"; // Name of player who can call for a bo
+		NTConfig_GrabNearbyWps = false; // Set to true to take waypoints that are nearby back to town
+		NTConfig_AlertType = 1; // 1 = Print, 0 = Say
+		NTConfig_BoStopMessage = "TP for WS lvl 3 up, help me clear throne"; // Message to stop the BO script, eg WSK lvl 3 message enabling the barb to switch to a baal leech fighter role.
+
 	//NTConfig_Script.push("NTLeechCows.ntj");			// Leech fighter cow script.  Must run leader with NTCow.ntj
 		NTConfig_WaitForCowPortal = 240;				// time in seconds to wait for the leader to make cow portal before aborting the script
 

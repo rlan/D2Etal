@@ -6,6 +6,8 @@ function NTP_DoPrecastCTA(refresh, castbo)
 	if(arguments.length < 2)
 		castbo = true;
 
+	boWait = 0;
+
 	if(me.classid == NTC_CHAR_CLASS_BARBARIAN || NTC_InTown())
 		return false;
 		
@@ -17,12 +19,70 @@ function NTP_DoPrecastCTA(refresh, castbo)
 			{
 				NTC_CastSkill(155, NTC_HAND_RIGHT); // Battle Command
 				NTC_CastSkill(149, NTC_HAND_RIGHT); // Battle Orders
+				if(me.classid == NTC_CHAR_CLASS_BARBARIAN)
+					NTC_CastSkill(138, NTC_HAND_RIGHT); // Shout
 			}
 			
 			NTC_SwapWeapons();
 
 			return true;
+
+		} else if (NTConfig_BoBarbFollowing && NTConfig_BoOnce > 0) {
+
+			if(NTP_BoBarbIngame()){
+				if (NTConfig_CallForBo) {
+					NTM_MakeTP();
+					NTM_MoveTo(me.areaid, me.x + 3, me.y + 3);
+					Delay(500); // Wait enough time for the character to move away from the way point platform. Otherwise, it seems, the Barb detects the caller in an incorrect Act.
+					Say("bo me " + NTConfig_BoBarb);
+				}
+
+				while (!me.GetState(32) || !me.GetState(51)) {
+					if (boWait >= NTConfig_BoWait) {
+						if( NTConfig_BoExit) {
+							NTC_SendLogToOOG(NTC_LOG_COMMON, COLOR_1 + "Never got Barb's Bo, quitting");
+							ExitGame(); 
+						} else {
+							break
+						}
+					}
+					Delay(1000);
+					boWait += 1;
+					Print(COLOR_4 + "Waiting for BO... " + boWait + " of " + NTConfig_BoWait);
+				}
+
+				if(NTConfig_BoOnce){
+					NTConfig_BoOnce = 0;
+				}
+
+				if(boWait == NTConfig_BoWait && NTConfig_BoExit) {
+					NTC_SendLogToOOG(NTC_LOG_COMMON, COLOR_1 + "Never got Barb's Bo, quitting");
+					ExitGame(); 
+				}
+
+				return true;
+
+			} else if (NTConfig_BoExit == 1) {
+				NTC_SendLogToOOG(NTC_LOG_COMMON, COLOR_1 + "Bo Barb not in game, quitting");
+				ExitGame(); 
+			}
+
 		}
+	}
+	return false;
+}
+ 
+function NTP_BoBarbIngame() {
+	var player;
+
+	player = GetPlayerUnit();
+
+	if (player) {
+		do {
+			if (player.name == NTConfig_BoBarb) {
+				return true;
+			}
+		} while (player.GetNext());
 	}
 
 	return false;
@@ -53,7 +113,7 @@ function NTP_DoEnchant()
 	var _haveenchant = NTC_GetSkillLevel(52);
 	var _unit = NTC_FindUnit(NTC_UNIT_MERC);
 
-	if (_haveenchant && _unit ) 
+	if (_haveenchant && _unit )
 	{
 		do
 		{
@@ -66,10 +126,10 @@ function NTP_DoEnchant()
 			}
 		} while (_unit.GetNext());
 	}
-	
+
 	if(!NTConfig_EnchantSelf)
 		return;
-		
+
 	_unit = NTC_FindUnit(NTC_UNIT_PLAYER);
 	if (_haveenchant &&_unit)
 	{
@@ -82,13 +142,12 @@ function NTP_DoEnchant()
 			}
 		} while (_unit.GetNext());
 	}
- 
 }
-
+ 
 function NTP_DoPrecast(refresh, castbo)
 {
 	var _unit = me.GetMerc();
-	
+
 	if(arguments.length < 2)
 		castbo = true;
 
@@ -108,31 +167,31 @@ function NTP_DoPrecast(refresh, castbo)
 
 		if(refresh || !me.GetState(38))
 			NTC_CastSkill(57, NTC_HAND_RIGHT); // Thunder Storm
-			
+
 		if(NTConfig_SwitchCastSorc)
 			NTC_SwapWeapons();
-			
+
 		if(refresh || me.GetState(30) == 0)
 			NTC_CastSkill(58, NTC_HAND_RIGHT); // Energy Shield
-			
+
 		if(refresh || (!me.GetState(10) && !me.GetState(88) && !me.GetState(20)))
 		{
 			if(!NTC_CastSkill(50, NTC_HAND_RIGHT)) // Shiver Armor
 				if(!NTC_CastSkill(60, NTC_HAND_RIGHT)) // Chilling Armor
 					NTC_CastSkill(40, NTC_HAND_RIGHT); // Frozen Armor
 		}
-		
+
 		if(NTConfig_SwitchCastSorc)
 			NTC_SwapWeapons();
-			
+
 		if((_unit != null && refresh) || (_unit != null && !_unit.GetState(16)))
-		  NTP_DoEnchant();  // Enchant Merc
+			NTP_DoEnchant();  // Enchant Merc
 
 		break;
 
 	case NTC_CHAR_CLASS_NECROMANCER:
 		NTP_CastBC(refresh);
-		
+
 		if(refresh || !(NTP_GetMinion(289) || NTP_GetMinion(290) || NTP_GetMinion(291) || NTP_GetMinion(292)))
 		{
 			switch(NTConfig_Golem)
@@ -158,7 +217,7 @@ function NTP_DoPrecast(refresh, castbo)
 				break;
 			}
 		}
-		
+
 		if(NTC_GetSkillLevel(73))
 			NTC_CastSkill(73, NTC_HAND_LEFT); // Necro Poison dagger
 
@@ -179,19 +238,19 @@ function NTP_DoPrecast(refresh, castbo)
 		{
 			if(BarbSwitch)
 				NTC_SwapWeapons();
-				
+
 			if(castbo)
 			{
 				NTC_CastSkill(155, NTC_HAND_RIGHT); // Battle Command
 				NTC_CastSkill(149, NTC_HAND_RIGHT); // Battle Orders
 			}
-			
+
 			NTC_CastSkill(138, NTC_HAND_RIGHT); // Shout
-				
+
 			if(BarbSwitch)
 				NTC_SwapWeapons();
 		}
-		
+
 		break;
 
 	case NTC_CHAR_CLASS_DRUID:
@@ -227,7 +286,7 @@ function NTP_DoPrecast(refresh, castbo)
 
 	case NTC_CHAR_CLASS_ASSASSIN:
 		NTP_CastBC(refresh);
-	
+
 		if(refresh || !(NTP_GetMinion(417) || NTP_GetMinion(418)))
 		{
 			switch(NTConfig_UseShadow)
@@ -250,7 +309,7 @@ function NTP_DoPrecast(refresh, castbo)
 
 		if((refresh || !me.GetState(157)) && NTConfig_UseBOS)
 			NTC_CastSkill(258, NTC_HAND_RIGHT); // Burst of Speed
-			
+
 		if((refresh || !me.GetStat(181)) && NTConfig_UseFade)
 			NTC_CastSkill(267, NTC_HAND_RIGHT); // Fade
 
@@ -303,15 +362,15 @@ function NTP_BOSwitch()
 function NTP_GetMinion(classID)
 {
 	_minion = NTC_FindUnit(NTC_UNIT_MONSTER, classID);
-	
+
 	if(!_minion)
 		return false;
-		
+
 	do
 	{
 		if(NTC_CheckOwner(_minion) && _minion.hp > 0)
 			return true;
 	}while(_minion.GetNext());
-	
+
 	return false;
 }

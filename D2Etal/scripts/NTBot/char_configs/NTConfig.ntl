@@ -525,3 +525,15 @@ var NTConfig_CSDodge;
 	var NTConfig_ChantLocation;
 	var NTConfig_PortalWait;
 	var NTConfig_DisplayTime;
+	
+//Leech BO
+	var NTConfig_BoBarbFollowing;
+	var NTConfig_CallForBo;
+	var NTConfig_BoBarb;
+	var NTConfig_BoWho;
+	var NTConfig_GrabNearbyWps;
+	var NTConfig_AlertType;
+	var NTConfig_BoWait;
+	var NTConfig_BoStopMessage;
+	var NTConfig_BoExit;
+	var NTConfig_BoOnce;

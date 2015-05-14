@@ -109,10 +109,16 @@ function NT_LeechBaalPassively(){
 	}
 	if(NTConfig_LeechPrecast){
 		NTP_DoPrecast(true, NTConfig_LeechBo);
+		NTC_Delay(2000);
+		NTP_DoPrecast(true, NTConfig_LeechBo); // Again for other bots, e.g. BO. Team botting.
 	}
 	NTM_MoveTo(me.areaid, leechpos[0], leechpos[1]);
 	if(NTConfig_UsePaliAura > 0){
 		NTC_PutSkill(NTConfig_UsePaliAura, NTC_HAND_RIGHT);
+	}
+	if(NTConfig_LeechPrecast){
+		NTC_Delay(10000);
+		NTP_DoPrecast(true, NTConfig_LeechBo); // Again for human leechers
 	}
 	if(NTConfig_FollowtoWorldStone){
 		while(NTC_CheckPlayer(NTConfig_Leader)){

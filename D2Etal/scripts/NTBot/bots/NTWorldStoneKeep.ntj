@@ -137,6 +137,7 @@ function NTMain(){
 		Say(Baal_SafeTp);
 		NTC_Delay(500);
 		NTP_DoPrecast(true);
+		NTC_Delay(5000); // Wait for Barb's BO. Team botting.
 	}
 	while(1){
 		NTC_Delay(100);
